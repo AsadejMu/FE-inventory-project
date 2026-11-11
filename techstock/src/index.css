@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+/* ธีมกลาง: เปลี่ยนสีหลักที่เดียวมีผลทุกหน้า */
+@theme {
+  --font-sans: "IBM Plex Sans Thai", ui-sans-serif, system-ui, sans-serif;
+  --color-ink: #0b1220;
+  --color-brand-50: #ecfdf8;
+  --color-brand-300: #5eead4;
+  --color-brand-500: #14b8a6;
+  --color-brand-600: #0d9488;
+  --color-brand-700: #0f766e;
+}
+
+@layer base {
+  body { background: #f4f6fa; color: #1e293b; }
+  thead th { font-weight: 600; letter-spacing: 0.02em; }
+  tbody tr:hover { background: #f8fafc; }
+}
+
+@layer components {
+  .card { @apply bg-white border border-slate-200 rounded-2xl shadow-sm; }
+  .input { @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 disabled:bg-slate-100 disabled:text-slate-400; }
+  .btn { @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed; }
+  .btn-sm { @apply px-3 py-1 text-xs; }
+  .btn-primary { @apply bg-brand-600 text-white hover:bg-brand-700; }
+  .btn-success { @apply bg-emerald-600 text-white hover:bg-emerald-700; }
+  .btn-danger { @apply bg-rose-600 text-white hover:bg-rose-700; }
+  .btn-dark { @apply bg-slate-700 text-white hover:bg-slate-600; }
+  .btn-ghost { @apply border border-slate-300 bg-white text-slate-700 hover:bg-slate-50; }
+  .page-title { @apply text-2xl font-bold tracking-tight text-slate-900 mb-6; }
+}
