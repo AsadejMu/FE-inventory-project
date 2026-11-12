@@ -5,7 +5,7 @@ function ProductCard({ product }) {
 
   return (
     <div className="card overflow-hidden h-full transition hover:-translate-y-0.5 hover:shadow-md">
-      <div className="h-36 flex items-center justify-center bg-linear-to-br from-slate-100 to-slate-200 text-5xl">
+      <div className="h-36 flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 text-5xl">
         {product.image_url ? (
           <img src={product.image_url} alt={product.name} className="h-full object-contain" />
         ) : (

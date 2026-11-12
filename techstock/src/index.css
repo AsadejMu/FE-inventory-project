@@ -1,16 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap");
-@import "tailwindcss";
 
-/* ธีมกลาง: เปลี่ยนสีหลักที่เดียวมีผลทุกหน้า */
-@theme {
-  --font-sans: "IBM Plex Sans Thai", ui-sans-serif, system-ui, sans-serif;
-  --color-ink: #0b1220;
-  --color-brand-50: #ecfdf8;
-  --color-brand-300: #5eead4;
-  --color-brand-500: #14b8a6;
-  --color-brand-600: #0d9488;
-  --color-brand-700: #0f766e;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
   body { background: #f4f6fa; color: #1e293b; }

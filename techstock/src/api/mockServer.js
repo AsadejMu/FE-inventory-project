@@ -1,5 +1,5 @@
 // Backend จำลอง (เก็บใน localStorage) ตอบตาม API Contract เดียวกับ Go
-// ใช้เฉพาะตอนยังไม่ได้ตั้ง VITE_API_URL
+// ใช้เฉพาะตอนยังไม่ได้ตั้ง REACT_APP_API_URL
 const KEY = "techstock_db";
 
 const seed = {
@@ -21,7 +21,7 @@ const seed = {
   movements: [],
 };
 
-const load = () => JSON.parse(localStorage.getItem(KEY) || "null") || structuredClone(seed);
+const load = () => JSON.parse(localStorage.getItem(KEY) || "null") || JSON.parse(JSON.stringify(seed));
 const save = (db) => localStorage.setItem(KEY, JSON.stringify(db));
 const fail = (status, message, errors) => { throw Object.assign(new Error(message), { status, errors }); };
 const delay = () => new Promise((r) => setTimeout(r, 250));

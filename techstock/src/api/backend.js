@@ -1,8 +1,9 @@
 import { mockServer } from "./mockServer";
 
-const API_URL = import.meta.env.VITE_API_URL;
+// ตัด / ท้ายลิงก์ออกกันพิมพ์เกิน (ไม่งั้น URL จะเป็น ...com//api/... แล้วขึ้น CORS error)
+const API_URL = (process.env.REACT_APP_API_URL || "").replace(/\/+$/, "");
 
-// ฟังก์ชันกลาง: ถ้ามี VITE_API_URL ใช้ fetch ไป Go จริง ไม่มีก็ใช้ Mock
+// ฟังก์ชันกลาง: ถ้ามี REACT_APP_API_URL ใช้ fetch ไป Go จริง ไม่มีก็ใช้ Mock
 export async function apiFetch(path, options = {}) {
   const token = localStorage.getItem("token");
   const method = options.method || "GET";

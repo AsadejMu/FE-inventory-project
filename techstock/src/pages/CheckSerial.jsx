@@ -13,28 +13,33 @@ function CheckSerial() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [tick, setTick] = useState(0); // กด "ตรวจสอบ" ซ้ำด้วยค่าเดิมแล้วให้ตรวจใหม่
 
-  async function search(value) {
-    const v = value.trim();
-    if (!v) return;
-    setLoading(true); setError(""); setResult(null);
-    try {
-      const res = await checkSerial(v);
-      setResult(res.data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+  // ที่อยู่ในแถบ URL (?serial=...) เป็นตัวกำหนดว่าจะตรวจอะไร จึงเปิดลิงก์จากหน้าคำขอเบิกแล้วตรวจให้เลย
+  useEffect(() => {
+    const v = initial.trim();
+    if (!v) { setResult(null); return; }
+    let ignore = false;
+    async function run() {
+      setLoading(true); setError(""); setResult(null);
+      try {
+        const res = await checkSerial(v);
+        if (!ignore) setResult(res.data);
+      } catch (err) {
+        if (!ignore) setError(err.message);
+      } finally {
+        if (!ignore) setLoading(false);
+      }
     }
-  }
-
-  // เปิดมาพร้อม ?serial=... (เช่นกดจากหน้าคำขอเบิก) ให้ค้นหาให้เลย
-  useEffect(() => { if (initial) search(initial); }, []);
+    run();
+    return () => { ignore = true; };
+  }, [initial, tick]);
 
   function handleSubmit(e) {
     e.preventDefault();
-    setParams(serial.trim() ? { serial: serial.trim() } : {});
-    search(serial);
+    const v = serial.trim();
+    setParams(v ? { serial: v } : {});
+    setTick((t) => t + 1);
   }
 
   const issued = result?.type === "issued";
